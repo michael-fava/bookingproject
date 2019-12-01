@@ -61,7 +61,7 @@ Database is implemented using H2 in memory and entities are accessed using Sprin
 
 Booking-API provides a REST api to perform CRUD operations on the booking system.
 
-BaseURL: http://localhost:8080/bookings
+BaseURL: http://localhost:8081/bookings
 
 #### Execution
 
