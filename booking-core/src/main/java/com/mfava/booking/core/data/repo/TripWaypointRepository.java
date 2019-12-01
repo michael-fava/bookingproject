@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface TripWaypointRepository extends JpaRepository<TripWaypoint, UUID> {
 
-    List<TripWaypoint> findAllByBookingEquals(UUID bookingId);
+    List<TripWaypoint> findAllByBooking_BookingId(UUID bookingId);
 
 
 

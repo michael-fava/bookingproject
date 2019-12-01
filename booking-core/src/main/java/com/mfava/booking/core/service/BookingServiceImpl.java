@@ -2,6 +2,7 @@ package com.mfava.booking.core.service;
 
 import com.mfava.booking.contract.BookingDTO;
 import com.mfava.booking.core.data.dao.BookingDAO;
+import com.mfava.booking.core.data.dao.TripWaypointDAO;
 import com.mfava.booking.core.data.service.BookingDataService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +44,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingDAO> getAllBookings() {
         return bookingDataService.getAllBookings();
+    }
+
+    @Override
+    public List<TripWaypointDAO> getBookingTripWaypoints(UUID id) {
+        return bookingDataService.getBookingTripWayPoints(id);
     }
 }

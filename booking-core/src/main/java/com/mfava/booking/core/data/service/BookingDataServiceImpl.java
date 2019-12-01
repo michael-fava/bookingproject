@@ -2,6 +2,7 @@ package com.mfava.booking.core.data.service;
 
 import com.mfava.booking.core.ModelMapper;
 import com.mfava.booking.core.data.dao.BookingDAO;
+import com.mfava.booking.core.data.dao.TripWaypointDAO;
 import com.mfava.booking.core.data.model.Booking;
 import com.mfava.booking.core.data.model.TripWaypoint;
 import com.mfava.booking.core.data.repo.BookingRepository;
@@ -13,12 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author michaelfava
@@ -70,6 +71,16 @@ public class BookingDataServiceImpl implements BookingDataService {
         return modelMapper.mapAsList(bookingRepository.findAllByDeletedFalse(), BookingDAO.class);
     }
 
+
+    @Override
+    public List<TripWaypointDAO> getBookingTripWayPoints(UUID id) {
+        final Optional<Booking> booking = bookingRepository.findByBookingIdAndDeletedFalse(id);
+        return booking.stream()
+                .map(Booking::getTripWayPoints)
+                .flatMap(List::stream)
+                .map(tripWaypoint -> modelMapper.map(tripWaypoint ,TripWaypointDAO.class))
+                .collect(Collectors.toList());
+    }
 
     private Booking updateBookingInstance(Booking originalBooking, BookingDAO bookingDAO) {
         return Booking.builder()

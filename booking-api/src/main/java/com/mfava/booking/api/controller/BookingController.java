@@ -3,6 +3,7 @@ package com.mfava.booking.api.controller;
 import com.mfava.booking.api.dto.ApiBooking;
 import com.mfava.booking.api.dto.ApiBookingRequest;
 import com.mfava.booking.api.dto.ApiBookingUpdateRequest;
+import com.mfava.booking.api.dto.ApiTripWaypoint;
 import com.mfava.booking.api.service.BookingService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -24,16 +25,24 @@ public class BookingController {
     BookingService bookingService;
 
     @ApiOperation(value = "List all bookings")
-    @GetMapping
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     List<ApiBooking> getBookings(){
         return bookingService.getBookings();
     }
 
     @ApiOperation(value = "Get a booking by Id")
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ApiBooking getBookingById(@PathVariable @NotNull @ApiParam(name = "booking_id") String id){
         return bookingService.getBookingById(id);
     }
+
+    @ApiOperation(value = "Get tripwaypoints of a booking by Id")
+    @GetMapping(value = "/{id}/tripwaypoints", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    List<ApiTripWaypoint> getTripWayPointsByBookingId(@PathVariable @NotNull @ApiParam(name = "booking_id") String id){
+        return bookingService.getBookingTripWayPoints(id);
+    }
+
+
 
     @ApiOperation(value = "Create a new booking", response = ApiBooking.class)
     @PostMapping

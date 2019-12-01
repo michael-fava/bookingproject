@@ -3,6 +3,7 @@ package com.mfava.booking.core.data.dao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.OptBoolean;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mfava.booking.contract.config.OffsetDateTimeModule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class BookingDAO implements Serializable{
     private String passengerName;
     private String passengerContactNumber;
 
+    @JsonSerialize(using = OffsetDateTimeModule.CustomOffsetDateTimeSerializer.class)
     @JsonDeserialize(using = OffsetDateTimeModule.CustomOffsetDateTimeDeserializer.class)
     private OffsetDateTime pickupTime;
     private Boolean asap = true;

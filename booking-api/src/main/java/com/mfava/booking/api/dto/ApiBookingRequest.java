@@ -1,6 +1,7 @@
 package com.mfava.booking.api.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mfava.booking.contract.config.OffsetDateTimeModule;
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class ApiBookingRequest implements Serializable {
     @NotNull
     private String passengerContactNumber;
 
+    @JsonSerialize(using = OffsetDateTimeModule.CustomOffsetDateTimeSerializer.class)
     @JsonDeserialize(using = OffsetDateTimeModule.CustomOffsetDateTimeDeserializer.class)
     private OffsetDateTime pickupTime;
 

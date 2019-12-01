@@ -1,6 +1,7 @@
 package com.mfava.booking.core.service;
 
 import com.mfava.booking.core.data.dao.BookingDAO;
+import com.mfava.booking.core.data.dao.TripWaypointDAO;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,4 +20,6 @@ public interface BookingService {
     BookingDAO getBookingById(UUID id);
 
     List<BookingDAO> getAllBookings();
+
+    List<TripWaypointDAO> getBookingTripWaypoints(UUID id);
 }

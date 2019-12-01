@@ -3,6 +3,7 @@ package com.mfava.booking.api.service;
 import com.mfava.booking.api.dto.ApiBooking;
 import com.mfava.booking.api.dto.ApiBookingRequest;
 import com.mfava.booking.api.dto.ApiBookingUpdateRequest;
+import com.mfava.booking.api.dto.ApiTripWaypoint;
 import com.mfava.booking.api.integration.BookingCoreFeignClient;
 import com.mfava.booking.api.integration.QueueProducer;
 import com.mfava.booking.api.util.ModelMapper;
@@ -41,6 +42,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public ApiBooking getBookingById(String id) {
         return modelMapper.map(bookingCoreFeignClient.getBookingById(id), ApiBooking.class);
+    }
+
+    @Override
+    public List<ApiTripWaypoint> getBookingTripWayPoints(String id) {
+        return modelMapper.mapAsList(bookingCoreFeignClient.getBookingTripWayPointsById(id), ApiTripWaypoint.class);
     }
 
     @Override
